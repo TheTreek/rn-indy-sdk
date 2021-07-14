@@ -500,38 +500,40 @@ const indy = {
     return [credDefId, JSON.parse(credDef)]
   },
 
-  async buildGetRevocRegDefRequest(submitterDid: Did | null, revocRegDefId: string): Promise<LedgerRequest>{
-    if(Platform.OS === 'ios'){
+  async buildGetRevocRegDefRequest(submitterDid: Did | null, revocRegDefId: string): Promise<LedgerRequest> {
+    if (Platform.OS === 'ios') {
       throw new Error(`Unsupported operation! Platform: ${Platform.OS}`)
     }
-    return JSON.parse(await IndySdk.buildGetRevocRegDefRequest(submitterDid,revocRegDefId))
+    return JSON.parse(await IndySdk.buildGetRevocRegDefRequest(submitterDid, revocRegDefId))
   },
 
-  async parseGetRevocRegDefResponse(getRevocRegResponse: LedgerRequestResult): Promise<GetRevocRegDefResponse>{
-    if(Platform.OS === 'ios'){
+  async parseGetRevocRegDefResponse(getRevocRegResponse: LedgerRequestResult): Promise<GetRevocRegDefResponse> {
+    if (Platform.OS === 'ios') {
       throw new Error(`Unsupported operation! Platform: ${Platform.OS}`)
     }
     const [revocRegDefId, revocRegDef] = await IndySdk.parseGetRevocRegDefResponse(JSON.stringify(getRevocRegResponse))
-    return [revocRegDefId, JSON.parse((revocRegDef))]
+    return [revocRegDefId, JSON.parse(revocRegDef)]
   },
 
   async buildGetRevocRegDeltaRequest(
-    submitterDid: Did | null, 
-    revocRegDefId: string, 
-    from: number = 0,  
+    submitterDid: Did | null,
+    revocRegDefId: string,
+    from: number = 0,
     to: number = new Date().getTime()
-  ):Promise<LedgerRequest>{
-    if(Platform.OS === 'ios'){
+  ): Promise<LedgerRequest> {
+    if (Platform.OS === 'ios') {
       throw new Error(`Unsupported operation! Platform: ${Platform.OS}`)
     }
-    return JSON.parse(await IndySdk.buildGetRevocRegDeltaRequest(submitterDid,revocRegDefId,from,to))
+    return JSON.parse(await IndySdk.buildGetRevocRegDeltaRequest(submitterDid, revocRegDefId, from, to))
   },
 
-  async parseGetRevocRegDeltaResponse(getRevocRegDeltaResponse: string):Promise<[string, object]>{
-    if(Platform.OS === 'ios'){
+  async parseGetRevocRegDeltaResponse(getRevocRegDeltaResponse: string): Promise<[string, object]> {
+    if (Platform.OS === 'ios') {
       throw new Error(`Unsupported operation! Platform: ${Platform.OS}`)
     }
-    const [revocRegId, revocRegDelta] = await IndySdk.parseGetRevocRegDeltaResponse(JSON.stringify(getRevocRegDeltaResponse))
+    const [revocRegId, revocRegDelta] = await IndySdk.parseGetRevocRegDeltaResponse(
+      JSON.stringify(getRevocRegDeltaResponse)
+    )
     return [revocRegId, JSON.parse(revocRegDelta)]
   },
 
@@ -840,11 +842,13 @@ const indy = {
     revRegDelta: string,
     timestamp: number,
     credRevId: string
-  ):Promise<any>{
-    if(Platform.OS ==='ios') {
+  ): Promise<any> {
+    if (Platform.OS === 'ios') {
       throw new Error(`Unsupported operation! Platform: ${Platform.OS}`)
     }
-    return JSON.parse(await IndySdk.createRevocationState(blobStorageReaderHandle,revRegDef,revRegDelta,timestamp,credRevId))
+    return JSON.parse(
+      await IndySdk.createRevocationState(blobStorageReaderHandle, revRegDef, revRegDelta, timestamp, credRevId)
+    )
   },
 
   // blob_storage
