@@ -191,8 +191,8 @@ export type CredentialDefs = {
  */
 export type RevStates = {
   [key: string]: {
-    [key: string]: unknown
-  }
+    [key: string]: unknown,
+  },
 }
 
 /**
