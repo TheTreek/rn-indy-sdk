@@ -667,6 +667,7 @@ public class IndySdkModule extends ReactContextBaseJavaModule {
             WritableArray result = new WritableNativeArray();
             result.pushString(ledgerResult.getId());
             result.pushString(ledgerResult.getObjectJson());
+            result.pushInt((int) ledgerResult.getTimestamp());
             promise.resolve(result);
         }catch(Exception e){
             IndySdkRejectResponse rejectResponse = new IndySdkRejectResponse(e);

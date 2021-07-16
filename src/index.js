@@ -189,7 +189,11 @@ export type CredentialDefs = {
  *    },
  *  }
  */
-export type RevStates = {}
+export type RevStates = {
+  [key: string]: {
+    [key: string]: unknown
+  }
+}
 
 /**
  * Json - Request data json
@@ -531,10 +535,10 @@ const indy = {
     if (Platform.OS === 'ios') {
       throw new Error(`Unsupported operation! Platform: ${Platform.OS}`)
     }
-    const [revocRegId, revocRegDelta] = await IndySdk.parseGetRevocRegDeltaResponse(
+    const [revocRegId, revocRegDelta, timestamp] = await IndySdk.parseGetRevocRegDeltaResponse(
       JSON.stringify(getRevocRegDeltaResponse)
     )
-    return [revocRegId, JSON.parse(revocRegDelta)]
+    return [revocRegId, JSON.parse(revocRegDelta), timestamp]
   },
 
   async proverCreateMasterSecret(wh: WalletHandle, masterSecretId: ?MasterSecretId): Promise<MasterSecretId> {
